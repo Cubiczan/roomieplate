@@ -1,0 +1,8 @@
+schema: spec-driven
+
+context: |
+  RoomiePlate is a Next.js App Router meal planner for a roommate with allergies.
+  The fictional roommate is Alex (peanut and shellfish, weeknight dinners under 30 minutes,
+  vegetarian-friendly). Open-weight planning goes through a local Ollama server.
+  Offline fixture recipes are the fallback when Ollama is down. No auth, no database,
+  no medical claims beyond a visible "not medical advice" banner.

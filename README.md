@@ -6,6 +6,16 @@ The friend in this project is **Alex**: peanut and shellfish allergies, a prefer
 
 This repo was started for the **Hacktoberfest Weekend Challenge, October 2–5, 2026**.
 
+<!-- product-screenshots:start -->
+## Product screenshots
+
+Roommate profile and meal-planning workspace, including preferences, allergy controls, weekly meals, and groceries.
+
+![roomieplate product interface](docs/screenshots/01-profile.png)
+
+Existing UI capture stored in this repository; displayed values may be demo or sample data.
+<!-- product-screenshots:end -->
+
 ## Who it is for
 
 Shared kitchens fail in small, specific ways. Someone buys the wrong sauce, a “quick noodle” recipe hides peanut butter in step two, or Thursday’s dinner gets planned by whoever is hungriest. RoomiePlate is for the roommate who cooks and wants the constraint written down before the pan is hot.

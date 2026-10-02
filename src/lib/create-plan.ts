@@ -1,5 +1,5 @@
 import { DISCLAIMER } from "@/lib/types";
-import { ollamaConfig, completeWithOllama, extractJson } from "@/lib/ollama";
+import { ollamaConfig, completeWithOllama, describeOllamaFailure, extractJson } from "@/lib/ollama";
 import { assertPlanIsSafe, buildFixturePlan } from "@/lib/planner";
 import { repairOllamaPlan } from "@/lib/repair";
 import type { PlanOrigin, PlanRequest, WeekPlan } from "@/lib/types";
@@ -45,20 +45,6 @@ export async function createMealPlan(request: PlanRequest): Promise<PlanResult> 
       disclaimer: DISCLAIMER,
     };
   } catch (error) {
-    return fixtureResult(request, model, baseUrl, friendlyOllamaError(error));
+    return fixtureResult(request, model, baseUrl, describeOllamaFailure(error));
   }
-}
-
-function friendlyOllamaError(error: unknown): string {
-  const message = error instanceof Error ? error.message : "";
-  const cause = error instanceof Error ? error.cause : undefined;
-  const causeMessage = cause instanceof Error ? cause.message : "";
-  const causeCode =
-    cause && typeof cause === "object" && "code" in cause ? String((cause as { code?: unknown }).code ?? "") : "";
-  const combined = `${message} ${causeMessage} ${causeCode}`;
-  if (/abort/i.test(combined)) return "Ollama took too long to answer.";
-  if (/ECONNREFUSED|ENOTFOUND|fetch failed|network/i.test(combined)) {
-    return "Ollama is not running on this machine.";
-  }
-  return message || "Ollama is unreachable.";
 }

@@ -64,6 +64,17 @@ Close with this:
 
 “Alex’s allergies do not need to sit in a cloud prompt. Ollama runs Gemma, or Llama, on this machine. `OLLAMA_MODEL` swaps the weights. If the laptop is offline, the fixture planner still refuses peanut and shellfish. That is the open-source part: you can change the model, read the prompt, and keep the health note at home.”
 
+## Screenshots
+
+Taken with the offline fixture path (Ollama was not running). Regenerate them with the dev server up: `npm run demo:screenshots`.
+
+- `docs/screenshots/01-profile.png` — Alex’s profile and the not-medical-advice banner
+- `docs/screenshots/02-week.png` — the seven-day strip
+- `docs/screenshots/02-monday-dinner.png` — Monday’s dinner, ingredients, and the safety line
+- `docs/screenshots/03-after-swap.png` — after Swap meal
+- `docs/screenshots/04-grocery.png` — combined list and allergy watch
+- `docs/screenshots/05-mobile.png` — the same planner on a phone width
+
 ## If something looks wrong
 
 - Pill stuck on “Checking local model”: `/api/status` could not reach `OLLAMA_BASE_URL`. Fixtures will still generate.

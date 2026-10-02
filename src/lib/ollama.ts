@@ -17,6 +17,20 @@ export async function fetchWithTimeout(url: string, init: RequestInit, timeoutMs
   }
 }
 
+export function describeOllamaFailure(error: unknown): string {
+  const message = error instanceof Error ? error.message : "";
+  const cause = error instanceof Error ? error.cause : undefined;
+  const causeMessage = cause instanceof Error ? cause.message : "";
+  const causeCode =
+    cause && typeof cause === "object" && "code" in cause ? String((cause as { code?: unknown }).code ?? "") : "";
+  const combined = `${message} ${causeMessage} ${causeCode}`;
+  if (/abort/i.test(combined)) return "Ollama took too long to answer.";
+  if (/ECONNREFUSED|ENOTFOUND|fetch failed|network/i.test(combined)) {
+    return "Ollama is not running on this machine.";
+  }
+  return message || "Ollama is unreachable.";
+}
+
 export async function checkOllama(timeoutMs = 1800): Promise<{
   ok: boolean;
   model: string;
@@ -35,7 +49,7 @@ export async function checkOllama(timeoutMs = 1800): Promise<{
       ok: false,
       model,
       baseUrl,
-      error: error instanceof Error ? error.message : "Ollama is unreachable.",
+      error: describeOllamaFailure(error),
     };
   }
 }
